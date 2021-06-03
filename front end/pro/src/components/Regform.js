@@ -1,8 +1,10 @@
 import React from "react";
 import Tab from './tab';
 import axios from "axios";
+import {useform} from 'react-hook-form';
 import { useState, useEffect, useInput } from "react";
 const Regform = () => {
+  const {register,handlesubmit}=useform()
   const [student, setstudent] = useState({
     studentname: "",
     Dob: "",
