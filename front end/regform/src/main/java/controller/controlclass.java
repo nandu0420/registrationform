@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import regstd.stud;
+import services.Stdserv;
 import stdrepo.repoclass;
 
 @RestController
@@ -21,8 +22,10 @@ public class controlclass {
 	public void createstudent(@RequestBody stud data){
 		frm.insert(data);
 	}
-	@GetMapping("/listst")
-	public List<stud> liststud() {
-		return frm.findAll();
+	@Autowired
+	private Stdserv stdop;
+	@GetMapping(value="/listst")
+	public List<stud> getliststudByName() {
+		return stdop.findAllOrderByNameAsc();
 	}
 }
