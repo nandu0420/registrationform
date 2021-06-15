@@ -19,9 +19,9 @@ const Regform = () => {
     console.log(student);
   };
   const [records, setRecord] = useState([]);
-  //const onSubmit = (e) => {
-   //console.log(e);
- // };
+  //const onSubmit = ( data,e) => {
+  // console.log("data: ", { e });
+  //};
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -48,7 +48,7 @@ const Regform = () => {
       });
     });
   };
-console.log(student)
+ console.log(student)
   return (
     <div>
       <form action="" onSubmit={handleSubmit}>
