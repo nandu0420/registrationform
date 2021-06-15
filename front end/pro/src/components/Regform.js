@@ -48,7 +48,7 @@ const Regform = () => {
       });
     });
   };
- console.log(student)
+  console.log(student);
   return (
     <div>
       <form action="" onSubmit={handleSubmit}>
@@ -60,7 +60,7 @@ const Regform = () => {
             onChange={handleInput}
             name="username"
             id="username"
-            ref={register({ required: true })}
+            ref={register({ pattern: /^[a-zA-Z ]*$/ })}
             value={student.studentname}
           />
           {errors.username && "pls enter a valid username"}
