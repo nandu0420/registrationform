@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 const Tab = (props) => {
-  const [data, setdata] = useState(null);
+  const [data, setData] = useState(null);
   useEffect(() => {
-    setdata(props.data);
+    setData(props.data);
     return console.log("loaded");
-  });
+  },[props.data]);
   return (
     <div>
       {" "}
