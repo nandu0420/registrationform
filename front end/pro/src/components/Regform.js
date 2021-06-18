@@ -3,8 +3,11 @@ import Tab from "./tab";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { userSchema } from "./Validations/UserValidation";
+import { yupResolver } from '@hookform/resolvers/yup';
+//import * as yup from 'yup';
 const Regform = () => {
-  const { register, errors } = useForm();
+  const { register , formState:{errors} } = useForm({resolver:yupResolver(userSchema)});
   const [student, setStudent] = useState({
     studentname: "",
     Dob: "",
@@ -34,7 +37,7 @@ const Regform = () => {
     e.preventDefault();
     var dt = {
       id: records,
-      name: document.getElementById("username"),
+      name: document.getElementById("studentname"),
       Dob: document.getElementById("Dob"),
       CLASS: document.getElementById("cls"),
       division: document.getElementById("divi"),
@@ -58,12 +61,13 @@ const Regform = () => {
             type="text"
             autoComplete="off"
             onChange={handleInput}
-            name="username"
-            id="username"
-            ref={register({ pattern: /^[a-zA-Z ]*$/ })}
+            name="studentnamename"
+            id="studentname"
             value={student.studentname}
+            {...register('firstName')} className={`form-control ${errors.studentname ? 'is-invalid' : ''}`}
+            
           />
-          {errors.username && "pls enter a valid username"}
+          <div className="invalid-feedback">{errors.firstName?.message}</div>
         </div>
         <div>
           <label htmlFor="Dob">Date of birth </label>
@@ -73,12 +77,10 @@ const Regform = () => {
             onChange={handleInput}
             name="Dob"
             id="Dob"
-            ref={register({
-              pattern: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
-            })}
             value={student.Dob}
-          />
-          {errors.Dob && "pls enter a valid date of birth"}
+            {...register('Dob')} className={`form-control ${errors.Dob ? 'is-invalid' : ''}`}
+           />
+           <div className="invalid-feedback">{errors.Dob?.message}</div>
         </div>
         <div>
           <label htmlFor="CLASS">CLASS</label>
@@ -87,7 +89,7 @@ const Regform = () => {
             id="cls"
             onChange={handleInput}
             value={student.CLASS}
-            ref={register({ required: true })}
+            {...register('CLASS')} className={`form-control ${errors.CLASS ? 'is-invalid' : ''}`}
           >
             <option value="I">I</option>
             <option value="II">II</option>
@@ -102,7 +104,8 @@ const Regform = () => {
             <option value="XI">XI</option>
             <option value="XII">XII</option>
           </select>
-          {errors.cls && "pls enter the class"}
+          <div className="invalid-feedback">{errors.CLASS?.message}</div>
+          
         </div>
         <div>
           <label htmlFor="Division">Division</label>
@@ -110,13 +113,12 @@ const Regform = () => {
             name="divi"
             id="divi"
             onChange={handleInput}
-            ref={register({ required: true })}
-          >
+            {...register('divi')} className={`form-control ${errors.Division ? 'is-invalid' : ''}`}>
             <option value="A">A</option>
             <option value="B">B</option>
             <option value="C">C</option>
           </select>
-          {errors.divi && "pls enter the division of class"}
+          <div className="invalid-feedback">{errors.Division?.message}</div>
         </div>
         <div onChange={setGender}>
           <input
@@ -124,7 +126,7 @@ const Regform = () => {
             value="MALE"
             name="gender"
             id="gender"
-            ref={register({ required: true })}
+           {...register('Dob')} className={`form-control ${errors.Dob ? 'is-invalid' : ''}`}
           />{" "}
           Male
           <input
@@ -132,7 +134,7 @@ const Regform = () => {
             value="FEMALE"
             name="gender"
             id="gender"
-            ref={register({ required: true })}
+           {...register('Dob')} className={`form-control ${errors.Dob ? 'is-invalid' : ''}`}
           />{" "}
           Female
         </div>
